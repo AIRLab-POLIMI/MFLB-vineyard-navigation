@@ -1,0 +1,3 @@
+float64 corridor_width
+float64 row_dim
+string initial_turning_side

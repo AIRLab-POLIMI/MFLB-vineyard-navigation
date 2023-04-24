@@ -1,0 +1,9 @@
+<launch>
+
+	<node pkg="fre_row_navigation" name="pid_tester" type="pid_tester" output="screen">
+		<param name="storage" value="$(find fre_row_navigation)"/>
+	</node>
+	
+	 <node pkg="rqt_reconfigure" type="rqt_reconfigure" name="rqt_reconfigure"/> 
+
+</launch>

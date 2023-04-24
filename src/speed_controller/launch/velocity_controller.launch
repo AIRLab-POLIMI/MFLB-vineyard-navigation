@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+
+	<!-- launch file that can be used on Scout to set linear and angular speeds-->
+	
+    <node pkg="rostopic" type="rostopic" name="rostopic" args="echo /cmd_vel" output="screen"/>
+
+	<node pkg="speed_controller" type="velocity_publisher" name="velocity_publisher" output="screen"/>
+	<node pkg="rqt_reconfigure" type="rqt_reconfigure" name="rqt_reconfigure"/>
+    	
+
+</launch>
+
+

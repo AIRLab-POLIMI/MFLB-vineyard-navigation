@@ -1,0 +1,16 @@
+<launch>
+    <node pkg="fre_row_navigation" type="crawl_row_node" name="my_crawl_row" output="screen">
+        <remap from="lidar_front" to="/pc2_to_laserscan" />   <!-- this is the laserscan -->
+        <remap from="lidar_front_cloud_filtered" to="/os_cloud_node/points_filtered" />   <!-- this is the pointcloud2 -->
+	<remap from="/odometry/filtered" to="/my_odom" />   
+
+	<remap from="/my_crawl_row/drive_command" to="/cmd_vel"/>	<!-- scout base listens to cmd_vel for a command-->
+
+        <param name="p_gain" value="0.45" /> <!-- 0.35 | 0.45 for 0.7 speed -->
+	<param name="use_speed_control" value="true" />
+	<param name="end_line_frame_count_threshold" value="15" />
+	<param name="odom_topic" value="/my_odom" />
+	<param name="lidar_sensor" value="os_sensor" />
+	<param name="storage" value="$(find navigation)/storage" />
+    </node>
+</launch>

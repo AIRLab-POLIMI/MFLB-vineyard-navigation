@@ -1,0 +1,6 @@
+float32 default_turning_angle  #Default angle to turn 
+float32 speed
+int32 exit_enter		# 0=exit  1=enter
+---
+bool success 
+---

@@ -1,0 +1,5 @@
+Header header
+bool radius_filtering
+bool zone_filtering
+bool downsampling_filtering
+int32 side_to_remove

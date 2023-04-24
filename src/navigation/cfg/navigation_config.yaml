@@ -1,0 +1,13 @@
+max_lenght_plant_hole: 1.0
+out_margin: 0.5
+epsilon_increment_vision: 0.1
+straight_dist: 0.1
+view_radius: 1.5
+base_central_rect: 0.7
+base_lateral_rect: 0.4
+height_rect: 1.0
+space_between_rect: 0.2
+robot_side: 1.0
+robot_head: 0.8
+center_to_base_link: 0.2
+robot_edge: 0.1

@@ -1,0 +1,6 @@
+float32 min_travel_length  #Known minimum length to travel
+float32 speed
+float32 corridors_to_skip
+---
+bool success 
+---

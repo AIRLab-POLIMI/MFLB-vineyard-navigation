@@ -1,0 +1,6 @@
+float32 min_row_length  #Known minimum length of the rows. Robot will not detect row end before it has traveled this far.
+float32 speed
+float32 todo_rows
+---
+bool success #Whether the end of the row was reached
+---

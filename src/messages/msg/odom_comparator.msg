@@ -1,0 +1,19 @@
+time timestamp
+messages/velocities scout_velocities
+messages/velocities my_velocities
+geometry_msgs/Pose scout_pose
+geometry_msgs/Pose my_pose
+float64 x_err
+float64 y_err
+float64 th_err
+float64 average_x_err
+float64 average_y_err
+float64 average_th_err
+float64 meter_err_x
+float64 meter_err_y
+float64 error_distance
+float64 linear_vel_err
+float64 average_lin_vel_err
+float64 angular_vel_err
+float64 average_ang_vel_err
+

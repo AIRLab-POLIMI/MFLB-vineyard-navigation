@@ -1,0 +1,4 @@
+int32 start 	#when the server receives a goal, it starts performing operations. A subsequent goal stops the server
+---
+sensor_msgs/PointCloud2 clusters 
+---

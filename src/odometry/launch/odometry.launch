@@ -1,0 +1,24 @@
+<launch>
+
+	<node pkg="odometry" type="odometry" name="odometry" output="screen" >
+		<!-- <param name="publish_tf" value="false"/> 
+		<param name="alpha" value="0.97610861139452"/>
+		<param name="minus_y_icr" value="0.52833529475425"/>  -->
+		<rosparam file="$(find odometry)/cfg/odom_param.yaml" command="load" /> 
+	</node>
+	
+	<node pkg="odometry" type="rpm_converter" name="rpm_converter" output="screen" />
+
+	<node pkg="odometry" type="odom_comparator" name="odom_comparator" output="screen" />
+
+	<node pkg="rostopic" type="rostopic" name="rostopic2" args="echo /odom_comparator" output="screen" />
+
+	<!-- <node pkg="rostopic" type="rostopic" name="rostopic1" args="echo /scout_status" output="screen" />
+	<node pkg="rostopic" type="rostopic" name="rostopic2" args="echo /wheel_velocities" output="screen" /> -->
+
+
+	<!-- <include file ="$(find plant-phenotyper2)/launch/recording/only_ouster_ugv.launch" /> -->
+
+	
+
+</launch>

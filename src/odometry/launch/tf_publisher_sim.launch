@@ -1,0 +1,12 @@
+<launch>
+
+	<arg name="model_xacro" default="$(find scout_description)/urdf/scout_v2.xacro" />
+
+
+	<!-- <node pkg="tf" type="static_transform_publisher" name="os_sensor" args="-0.05 0 0.714 0.0 0.0 0.0 base_link ouster 100" /> -->
+    	<node pkg="tf" type="static_transform_publisher" name="baseLink_to_osSensor" args="-0.05 0.0 0.714 0.0 0.0 0.0 base_link os1_sensor 100" /> 
+	<node pkg="tf" type="static_transform_publisher" name="scout_link_to_base_link" args="0.0 0.0 0.0 0.0 0.0 0.0 scout_link base_link 100" /> 
+    	<node pkg="tf" type="static_transform_publisher" name="IMU" args="-0.1725 0 -0.03 0.0 0.0 0.0 base_link imu 100" />
+	<!-- <node pkg="tf" type="static_transform_publisher" name="osSensor_to_osLidar" args="0.0 0.0 0.03618 0.0 0.0 1.0 0.0 os_sensor os_lidar 100" /> -->
+
+</launch>

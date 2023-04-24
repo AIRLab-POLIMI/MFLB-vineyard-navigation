@@ -1,0 +1,70 @@
+<launch>
+	
+	<!-- params -->
+	<param name="/use_sim_time" value="true"/> 
+
+	<!-- bags -->
+	<!-- <node pkg="rosbag" type="play" name="player1" args="clock -l /home/veronica/Scrivania/ouster_bag/ouster2.bag" output="screen"/>
+	<node pkg="rosbag" type="play" name="player2" args="clock -l /home/veronica/Scrivania/vineyard_ugv/bag/opti_angular01.bag" output="screen"/> -->
+ <!-- <node pkg="rosbag" type="play" name="player2" args="clock -l /home/veronica/Scrivania/vineyard_ugv/bag/pc_bag2/2right_side.bag" /> -->
+	<!-- <node pkg="rosbag" type="play" name="player2" args="clock -l /home/veronica/Scrivania/ouster_bag/ouster2.bag" output="screen"/> -->
+
+	<!-- Tfs -->	
+	<include file ="$(find odometry)/launch/tf_publisher_sim.launch" />
+
+	<!-- node to convert PointCloud2 in LaserScan -->	
+	<include file ="$(find ira_laser_tools)/launch/my_laserscan_virtualizer.launch" />
+
+
+	<!-- launch the dynamic-rec controller -->
+	<node pkg="navigation" type="controller" name="controller" output="screen" clear_params="true"/>
+	 <node pkg="rqt_reconfigure" type="rqt_reconfigure" name="rqt_reconfigure"/> 
+
+
+	<!-- launch my odometry node -->
+	<node pkg="odometry" type="odometry_sim" name="odometry_sim" output="screen" />
+	
+
+	<!-- node to filter the PointClouds with different policies -->	
+	<node pkg="navigation" type="filter_node" name="filter_node" output="screen">
+		<param name="sensor_topic_name" value="os1_cloud_node" />
+		<param name="storage" value="$(find navigation)/storage" />
+	</node>
+
+
+	<!-- handler -->
+	<node pkg="navigation" type="sim_handler" name="sim_handler" output="screen" >
+		<rosparam file="$(find navigation)/cfg/navigation_config.yaml" command="load" />
+		<param name="end_row_server_name" value="parallel_line_navigation" />
+		<param name="in_row_server_name" value="my_crawl_row" />
+		<param name="turn_server_name" value="turn_action" />
+		<param name="lidar_topic_name" value="os1_cloud_node" />
+		<param name="file_path" value="$(find navigation)/paths/path1.txt" />
+		<param name="file_path" value="$(find navigation)/storage" />
+	</node>
+
+
+	<!-- actions -->
+
+	<!-- in-row navigation: cone and end_of_row recognition, cmd_vel command published -->
+	<include file ="$(find fre_row_navigation)/launch/my_crawl_row.launch" />
+
+	<!-- turn action to rotate the robot of x angle at exit/entrance of a row -->
+	 <include file ="$(find turn)/launch/turn.launch" />
+
+	<!-- end row navigation action for clusters/segments recognition -->
+	<node pkg="end_row_navigation" name="parallel_line_navigation" type="parallel_line_navigation" output="screen">
+		<param name="lidar_sensor" value="os1_sensor"/>
+		<param name="lidar_topic_name" value="/os1_cloud_node"/>
+		<param name="odom_topic" value="/my_odom"/>
+		<param name="pcl_assembler_server_name" value="pcl_euclidean_dist"/>
+		<param name="storage" value="$(find navigation)/storage" />
+	</node>
+
+	<!-- pcl_assembler action for clustering identification in PointCloud2 -->
+	<include file ="$(find pcl_assembler)/launch/cluster.launch" />
+
+
+
+
+</launch>

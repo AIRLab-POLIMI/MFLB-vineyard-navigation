@@ -1,0 +1,46 @@
+<launch>
+
+	<arg name="robot_namespace" default="/"/>
+
+	<!-- Load the surrounding environment into Gazebo -->
+	<!-- <arg name="world_name" default="$(find scout_gazebo_sim)worlds/weston_robot_empty.world"/>
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+		<arg name="world_name" value="$(arg world_name)"/>
+		<arg name="paused" value="false"/>
+		<arg name="use_sim_time" value="true"/>
+		<arg name="gui" value="true"/>
+		<arg name="headless" value="false"/>
+		<arg name="debug" value="false"/>
+	</include> -->
+
+	<!-- load a world created by me		vineyard_stage0_heightmap -->
+	<arg name="world_name" default="$(find navigation)world/vine_t0_terrain.world"/> 		<!-- long end_row vineyard:  end_row_t1.world not_working -->
+													<!-- long end_row vineyard:  vine_t0_no_terrain.world-->
+													<!-- long end_row vineyard:  vine_t0_terrain.world-->
+	
+
+	
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+		<arg name="world_name" value="$(arg world_name)"/>
+		<arg name="paused" value="false"/>
+   		<arg name="verbose" value="true" />
+		<arg name="use_sim_time" value="true"/>
+		<arg name="gui" value="true"/>
+		<arg name="headless" value="false"/>
+		<arg name="debug" value="false"/>
+	</include>
+
+
+	<!-- Load the Scout base into the environment -->
+	<include file="$(find scout_gazebo_sim)/launch/spawn_scout_v2.launch"></include> <!--<include file="$(find scout_gazebo_sim)/launch/spawn_scout_v2.launch"></include>--> 
+
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find scout_descr)/rviz/navigation.rviz" /> 
+
+
+
+
+	<!-- Load the gazebo params -->
+	<!-- <rosparam command="load" file="$(find navigation)/cfg/gazebo_pid.yaml"/> -->   <!-- se metto questi le ruote non sterzano -->
+
+</launch>
+

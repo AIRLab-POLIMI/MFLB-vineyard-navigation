@@ -1,0 +1,11 @@
+<launch>
+
+	<node pkg="pcl_assembler" type="pcl_euclidean_dist" name="pcl_euclidean_dist" output="screen">
+		<param name="debug" value="false" />
+		<param name="segradius" value="0.5" />
+		<param name="lidar_pc_name" value="/os_cloud_node/points_filtered" />
+		<param name="lidar_name" value="os_sensor" />
+		<param name="storage" value="$(find navigation)/storage" />
+	</node>
+
+</launch>

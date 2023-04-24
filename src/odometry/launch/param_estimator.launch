@@ -1,0 +1,13 @@
+<launch>
+
+
+	<include file ="$(find odometry)/launch/gpose_pose_conv.launch" />
+	<node pkg="odometry" name="param_estimator" type="param_estimator" output="screen" />
+	<node pkg="odometry" name="rpm_converter" type="rpm_converter" output="screen" />
+	<!-- <node pkg="rostopic" name="rostopic" type="rostopic" args="echo /odom_param" output="screen" />  -->
+
+  	<!-- <node name="minus_y_icr_plot" pkg="rqt_plot" type="rqt_plot" args="/odom_param/minus_y_icr" /> -->
+
+
+
+</launch>
